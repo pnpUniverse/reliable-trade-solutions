@@ -56,6 +56,7 @@ app.use('/api', api);
 /**
  * For deploying front-end
  */
+app.use('/', express.static('./front-end/dist'));
 app.use('/client', express.static('./front-end/dist'));
 app.use('/client/*', express.static('./front-end/dist'));
 app.use('/admin', express.static('./admin-panel/dist'));
