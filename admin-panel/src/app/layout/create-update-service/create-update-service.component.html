@@ -1,0 +1,31 @@
+<div class="wrapper">
+    <div class="content">
+        <form class="login-form" fxFlex [formGroup]="loginForm" (submit)="onLogin()">
+            <span fxFlex class="text-center text-danger" style="color: #f44336;" *ngIf="loginError != ''">{{loginError}}</span>
+            <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Service Name" formControlName="serviceName">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
+                <div fxFlexFill>
+                    <mat-form-field class="w-100">
+                        <input matInput placeholder="Service Description" formControlName="serviceDesc">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
+                <div fxFlexFill>
+                    <ejs-richtexteditor #toolsRTE id="alltoolRTE" formControlName="serviceServices" [toolbarSettings]="tools"> </ejs-richtexteditor>
+                </div>
+            </div>
+            <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+                <div fxFlexFill>
+                    <button type="submit" mat-raised-button color="primary" class="w-100" [disabled]="loginForm.invalid">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

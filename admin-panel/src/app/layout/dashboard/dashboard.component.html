@@ -1,0 +1,14 @@
+<div class="mb-20" fxLayout="row" fxLayout.lt-md="column" fxFlex fxLayoutGap="20px">
+    <div fxFlex>
+        <app-stat [bgClass]="'danger'" [icon]="'dashboard'" [count]="counts.services" [label]="'Services!'" [route]="'services'"></app-stat>
+    </div>
+    <div fxFlex>
+        <app-stat [bgClass]="'warn'" [icon]="'view_list'" [count]="counts.memberships" [label]="'Memberships!'" [route]="'memberships'"></app-stat>
+    </div>
+    <div fxFlex>
+        <app-stat [bgClass]="'success'" [icon]="'shopping_cart'" [count]="counts.contact_us_mail" [label]="'Contact Us Request!'" [route]="'contact_us_mails'"></app-stat>
+    </div>
+    <!-- <div fxFlex>
+        <app-stat [bgClass]="'info'" [icon]="'contact_support'" [count]="counts" [label]="'New Tickets!'"></app-stat>
+    </div> -->
+</div>

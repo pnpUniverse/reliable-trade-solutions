@@ -1,0 +1,36 @@
+<div class="container app-content">
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-4 mt-5">
+                <span class="text-danger" *ngIf="loginError != ''">{{loginError}}</span>
+                <form [formGroup]="loginForm" (submit)="loginUser()">
+                    <div role="group" class="email b-form-group form-group">
+                        <label for="emailInput" class="col-form-label pt-0">Email address:</label>
+                        <div class="input-group flex-nowrap">
+                            <div class="input-group-prepend ">
+                                <span class="curve-left input-group-text" id="addon-wrapping">@</span>
+                            </div>
+                            <input type="text" class="curve-right form-control" formControlName="email" placeholder="Enter email">
+                        </div>
+                        <span class="text-danger" *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">Email is invalid</span>
+                    </div>
+                    <div role="group" class="pass b-form-group form-group">
+                        <label for="passwordInput" class="col-form-label pt-0">Password:</label>
+                        <div class="input-group">
+                            <input type="password" name="password" formControlName="password" placeholder="Enter password" aria-required="true" class="curve form-control" passwordToggle required>
+                        </div>
+                        <span class="text-danger" *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">Password should be upto 6 characters</span>
+                    </div>
+                    <span>
+						Remember me	
+                        <input type="checkbox" name="login_remember"  [checked]="cookieValue" (change)="isRemebered($event)" >
+					</span><br>
+                    <button type="submit" class="curve btn btn-primary" [disabled]="loginForm.invalid">Submit</button>&nbsp;
+                    <button type="reset" class="curve btn btn-danger">Reset</button>
+                    <!-- <a href="javascript:void(0)" class="pull-right" (click)="forgotPassword()">Forgot Password?</a> -->
+                    Don't have account? <a routerLink="/register" routerLinkActive="active">Register</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

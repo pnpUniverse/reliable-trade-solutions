@@ -1,0 +1,147 @@
+<div class="toolbar" role="banner">
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top header_background">
+    <div class="container d-flex align-items-center justify-content-between">
+      <h1 class="logo" style="font-size: 26px;"><a routerLink="">Reliable Trade Solutions</a></h1>
+      <nav class="navbar navbar-expand-sm navbar-light">
+        <!-- <a class="navbar-brand" href="#">Brand/Logo</a> -->
+        <button class="navbar-toggler display_hamburger" (click)="collapse=!collapse" type="button" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon display_hamburger"></span>
+        </button>
+      
+        <div class="navbar-collapse" (click)="collapse=true" [hidden]="collapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item" *ngFor="let myRoute of myRoutes; let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
+              <a class="nav-link display_link" routerLink="{{ myRoute.url }}">{{ myRoute.name }}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- End Header -->
+</div>
+<router-outlet></router-outlet>
+<!-- ======= Footer ======= -->
+<footer id="footer">
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6" *ngIf="contact_us_content">
+          <div class="footer-info">
+            <h3 style="font-size: 17px;">Reliable Trade Solutions</h3>
+            <p>
+              {{contact_us_content.location}} <br>
+              <strong>Phone:</strong> {{contact_us_content.contact_no}}<br>
+              <strong>Email:</strong> {{contact_us_content.email}}<br>
+            </p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li *ngFor="let myRoute of myRoutesBottom; let i = index" [class.active]="selectedIndexBottom === i" (click)="setIndexBottom(i)">
+              <i class="bx bx-chevron-right"></i><a [routerLink]="myRoute.url">{{myRoute.name}}</a>
+            </li>
+          </ul>
+          <ngx-paypal style="display: none;" (click)="changeCurrency('EUR')" [config]="payPalConfig"></ngx-paypal>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Our Services</h4>
+          <ul>
+            <li *ngFor="let service of services">
+              <i class="bx bx-chevron-right"></i> <a routerLink="/service">{{service.serviceName}}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-lg-4 col-md-6 footer-newsletter">
+          <h4>Request for Free Trial</h4>
+          <form [formGroup]="loginForm" (submit)="loginUser()" class="contact">
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="name" placeholder="Name" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <div class="validate"></div>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="mobile" placeholder="Contact No/ Whatsapp" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <div class="validate"></div>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="email" placeholder="Email" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <div class="validate"></div>
+            </div>
+            <div class="form-group">
+              <select class="form-control">
+                <option value="">Select Services</option>
+                <option value="Short Term Trading Tips">KLSE Trading Tips</option>
+                <option value="Mid Term Investing Tips">SGX Trading Tisp</option>
+                <option value="Forex Signal Service">Forex Signal Service</option>
+                <option value="Traders Delight Service">Comex Signal Services/option>
+              </select>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" rows="3" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+              <div class="validate"></div>
+            </div>
+            <div class="text-center"><button type="submit" class="btn" style="background: #ffc451; cursor: pointer;" [disabled]="loginForm.invalid">Request For Free Trial</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- End Footer -->
+<div class="image">
+  <a (click)="open(mymodal)"><img id="hello" src="assets/img/signup.png" style="width: 50px;position: fixed;top:400px;left:2px;z-index: 999999;border: 2px solid #fbba42;border-top-right-radius: 15px;border-bottom-right-radius: 15px;cursor: pointer;"></a>
+</div>
+<ng-template #mymodal let-modal>
+  <form [formGroup]="loginForm" (submit)="loginUser()" class="contact">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">SIGN UP FOR TRIAL</h4>
+      <button type="button" (click)="modal.dismiss('Cross click')" class="close" data-dismiss="modal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="name" placeholder="Name" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+        <div class="validate"></div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="mobile" placeholder="Contact No/ Whatsapp" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+        <div class="validate"></div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" class="form-control" formControlName="email" placeholder="Email" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+        <div class="validate"></div>
+      </div>
+      <div class="form-group">
+        <select class="form-control" formControlName="service">
+          <option value="">Select Services</option>
+          <option value="Short Term Trading Tips">KLSE Trading Tips</option>
+          <option value="Mid Term Investing Tips">SGX Trading Tisp</option>
+          <option value="Forex Signal Service">Forex Signal Service</option>
+          <option value="Traders Delight Service">Comex Signal Services/option>
+        </select>
+      </div>
+      <!-- <div class="form-group">
+        <textarea class="form-control" rows="3" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+        <div class="validate"></div>
+      </div> -->
+    </div>
+    <div class="modal-footer">
+      <div class="text-center"><button type="submit" (click)="modal.close('Save click')" [disabled]="loginForm.invalid" class="btn" style="background: #ffc451; cursor: pointer;">GET TRIAL NOW</button></div>
+    </div>
+  </form>
+</ng-template>

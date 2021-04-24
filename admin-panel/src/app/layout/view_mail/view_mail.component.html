@@ -1,0 +1,31 @@
+<section *ngIf="mailObj">
+  <div class="container" fxLayout="column" fxLayout.md="row" fxLayoutGap="20px">
+    <div class="cardWrap" fxLayout.lt-md="column" fxLayout.md="column"  fxLayout="row" fxFlex.md="50" fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
+      <div fxFlex.lt-md="100" fxFlex="10">
+        <label><strong>Name: </strong></label>
+      </div>
+      <div fxFlex.lt-md="100" fxFlex="90">{{mailObj.name}}</div>
+    </div>
+    
+    <div class="cardWrap" fxLayout.lt-md="column" fxLayout.md="column"  fxLayout="row" fxFlex.md="50" fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
+      <div fxFlex.lt-md="100" fxFlex="10">
+        <label><strong>Email: </strong></label>
+      </div>
+      <div fxFlex.lt-md="100" fxFlex="90">{{mailObj.email}}</div>
+    </div>
+
+    <div class="cardWrap" fxLayout.lt-md="column" fxLayout.md="column"  fxLayout="row" fxFlex.md="50" fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
+      <div fxFlex.lt-md="100" fxFlex="10">
+        <label><strong>Subject: </strong></label>
+      </div>
+      <div fxFlex.lt-md="100" fxFlex="90">{{mailObj.subject}}</div>
+    </div>
+
+    <div class="cardWrap" fxLayout.lt-md="column" fxLayout.md="column"  fxLayout="row" fxFlex.md="50" fxLayoutAligmnet="space-between center" fxLayoutGap="20px">
+      <div fxFlex.lt-md="100" fxFlex="10">
+        <label><strong>Message: </strong></label>
+      </div>
+      <div fxFlex.lt-md="100" fxFlex="90">{{mailObj.message}}</div>
+    </div>
+  </div>
+</section>

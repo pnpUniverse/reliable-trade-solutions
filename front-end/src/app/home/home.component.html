@@ -1,0 +1,117 @@
+<section id="hero" class="d-flex align-items-center justify-content-center" *ngIf="homeObj">
+  <ngb-carousel *ngIf="this.homeObj.banner_image_path">
+    <ng-template ngbSlide *ngFor="let img_name of this.homeObj.banner_image_path; let i = index">
+      <img [src]="image_path_server+img_name" alt="Random first slide" class="image_customization" width="100%">
+      <div class="carousel-caption">
+        <h1 class="animated slideInLeft">{{homeObj.name}}</h1>
+        <h2 class="animated slideInLeft">{{homeObj.our_vision}}</h2>
+        <h2 class="animated slideInRight">{{homeObj.banner_messages[i]}}</h2>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</section>
+<div class="experience-area yellow-bg pt-50 pb-30">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-8 col-lg-9 col-md-8">
+        <div class="experience-text mb-20">
+          <h2>Needs experience Trading consultant?</h2>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-3 col-md-4">
+        <div class="experience-button text-md-right mb-20"> <a class="btn" href="https://api.whatsapp.com/send?phone=60182715774&text=Hello%20kindly%20Star%20my%20Free%20trial" target="_blank">Contact US <i class="fas fa-long-arrow-alt-right"></i></a> </div>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="container">
+  <div class="row mt-5 justify-content-center" class="padding_disp" *ngIf="homeObj">
+    <h3><b>{{homeObj.banner_message}}</b></h3>
+  </div>
+  <div class="row my-5">
+    <div class="col-md-6">
+      <img src="../../assets/img/3016792.jpg" height="230" width="100%">
+    </div>
+    <div class="col-md-6">
+      <div class="card" style="width:500px; height: 206px;">
+        <div class="card-body">
+          <p class="card-title">Live Currency</p>
+        </div>
+        <iframe scrolling="No" name="lcFrame" id="lcFrame" src="https://sslfxrates.forexprostools.com/index.php?param&amp;force_lang=1&amp;change=hide"></iframe>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row my-5">
+    <div class="col-md-6">
+      <iframe src="https://sgx.i3investor.com/jsp/module/mod_side_chart.jsp" width="100%" height="450" scrolling="no" frameborder="0"></iframe>
+    </div>
+    <div class="col-md-6">
+      <iframe src="https://klse.i3investor.com/jsp/module/mod_side_chart.jsp" width="100%" height="450" scrolling="no" frameborder="0"></iframe>
+    </div>
+  </div>
+</section>
+<section class="container my-1">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2 style="font-weight: bolder;">Who We Are</h2>
+        </div>
+        <div class="card-body">
+          <h4>Reliable Trade Solution is trading consultant company which incorporated with aim to give professional assistance to traders & give them handsome return on their investment</h4>
+          <p>Reliable Trade Solution has experience team of Researcher & Analyst who support traders to grow financially. Our ideal team serves traders professionally to gain good return in different market. We work flawlessly in the market to rescue traders stuck into the market & will help them throughout providing accurate trading signals. We serve in Singapore and Malaysia Stock Market as well as Forex Currency and Comex Commodity Market with minimal charges and ensure the excellent assistance throughout their trading</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <img src="../../assets/img/who_we_are.jpg" height="75%">
+    </div>
+  </div>
+</section>
+<div class="business-area pt-105 pb-110" style="background-image:url(../../assets/img/bg2.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="business-wrapper">
+          <div class="business-text text-center">
+            <p>The goal of a successful trader is to make the best trades. Money is secondary</p>
+            <span>Alexander Elder</span> </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- testimonials -->
+<section class="testi py-5" id="testi">
+  <div class="container py-md-5 py-3">
+    <div class="center">
+      <h3 class="heading py-3 my-sm-5 my-3 testimonial_content">What Our Client Say</h3>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 mb-4">
+        <div class="row testi-cgrid border-right-grid">
+          <div class="col-sm-4 testi-icon mb-sm-0 mb-3">
+            <img src="../../assets/img/testimonials/testimonials-1.jpg" alt="" class="img-fluid" />
+          </div>
+          <div class="col-sm-8">
+            <p class="mx-auto"><span class="fa fa-quote-left"></span> The Best Trading Tips to earn the daily profit from market with minimum investment.</p>
+            <h6 class="b-w3ltxt mt-3">Lee - <span>customer</span></h6>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 mb-4">
+        <div class="row testi-cgrid border-left-grid">
+          <div class="col-sm-4 testi-icon mb-sm-0 mb-3">
+            <img src="../../assets/img/testimonials/testimonials-2.jpg" alt="" class="img-fluid" />
+          </div>
+          <div class="col-sm-8">
+            <p class="mx-auto"><span class="fa fa-quote-left"></span>I am trading with this company from last 1 year and got the desired profit and higher returns over investment</p>
+            <h6 class="b-w3ltxt mt-3">Ng Ooi - <span>customer</span></h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- testimonials -->

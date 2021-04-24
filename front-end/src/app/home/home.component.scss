@@ -1,0 +1,103 @@
+.padding_disp {
+    padding: 2em;
+    text-align: -webkit-center;
+    white-space: pre-wrap;
+}
+
+.carousel-control-prev:hover{
+    background: rgba(0, 0, 0, 0.7);
+}
+.carousel-control-next:hover{
+    background: rgba(0, 0, 0, 0.7);
+}
+
+ngb-carousel {
+	width: 100% !important;
+	height: 100vh !important;
+}
+.carousel-caption {
+	top: 50%;
+	transform: translateY(-50%);
+	bottom: initial !important;
+	backdrop-filter: brightness(0.5);
+}
+.item {
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+.image_customization {
+	// filter: blur(4px);
+}
+
+.center {
+  text-align: center;
+  backdrop-filter: brightness(0.5);
+  color: white;
+}
+
+.business-area {
+    background-size: cover;
+    background-position: center center;
+}
+.pb-110 {
+    padding-bottom: 110px;
+}
+.pt-105 {
+    padding-top: 105px;
+}
+
+.business-text p {
+    font-size: 36px;
+    color: #fff;
+    font-weight: 800;
+    line-height: 50px;
+    margin-bottom: 0;
+    padding: 0 77px;
+}
+
+.business-text span {
+    color: #d6d6d6;
+    font-size: 16px;
+    display: inline-block;
+    position: relative;
+    margin-top: 14px;
+}
+
+.experience-text h2 {
+    color: #002e5b;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.experience-button .btn {
+    color: #fff;
+    background: #002e5b;
+    transition: .3s;
+}
+
+.yellow-bg {
+    background: antiquewhite;
+}
+.pb-30 {
+    padding-bottom: 30px;
+}
+.pt-50 {
+    padding-top: 50px;
+}
+
+.card-header {
+  /*padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);*/
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+  backdrop-filter: brightness(0.5) !important;
+  color: cornsilk !important;
+  font-weight: bolder !important;
+  text-align: center;
+}

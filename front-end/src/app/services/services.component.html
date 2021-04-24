@@ -1,0 +1,37 @@
+<section id="hero" class="d-flex align-items-center justify-content-center">
+  <div class="container" data-aos="fade-up">
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+      <div class="col-xl-6 col-lg-8">
+        <h1>Services</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="services" class="services">
+    <div class="container" data-aos="fade-up">
+        <!-- <div class="section-title">
+            <h2>Services</h2>
+            <p>Check our Services</p>
+        </div> -->
+
+        <div class="row">
+            <div class="col-md-6">
+              <img src="../../assets/img/2222_1.jpeg" height="340" width="100%">
+            </div>
+            <div class="col-md-6">
+                <p>We serve in Malaysia Bursa Stock Market and Singapore SGX Stock Market as well as Forex Currency and Comex Commodity Market with minimal charges and ensure the excellent support throughout traders trading</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200" *ngFor="let service of services">
+                <div class="icon-box animated slideInRight" (click)="service.show_hide =! service.show_hide">
+                    <div class="icon"><i class="bx bx-vector"></i></div>
+                    <h4>{{service.serviceName}}</h4>
+                    <p>{{service.serviceDesc}}</p>
+                    <span *ngIf="service.show_hide" [innerHTML]="service.serviceServices"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

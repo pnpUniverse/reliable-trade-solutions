@@ -1,0 +1,38 @@
+<section id="hero" class="d-flex align-items-center justify-content-center">
+  <div class="container" data-aos="fade-up">
+    <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
+      <div class="col-xl-6 col-lg-8">
+        <h1>Memberships</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="services" class="services" *ngIf="memberships">
+    <div class="row">
+        <div class="col-md-6" style="padding-bottom: : 1em;" *ngFor="let membership of memberships">
+            <div class="card">
+                <div class="card-header">
+                    {{membership.service_name}}
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Membership Tenure</th>
+                                <th scope="col">Plan Price</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let service_details of membership.service_details_arr">
+                                <td *ngIf="service_details.service_price">{{service_details.service_tenure}}</td>
+                                <td *ngIf="service_details.service_price">{{service_details.currency_used}} {{service_details.service_price}}</td>
+                                <td *ngIf="service_details.service_price"><ngx-paypal *ngIf="payPalConfig+'_'+service_details.service_slug" [id]="service_details.service_slug" [config]="payPalConfig+'_'+service_details.service_slug"></ngx-paypal></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

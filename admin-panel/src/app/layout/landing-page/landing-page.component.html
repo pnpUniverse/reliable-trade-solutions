@@ -1,0 +1,42 @@
+<div class="wrapper">
+  <div class="content">
+      <form class="login-form" fxFlex [formGroup]="loginForm" (submit)="onLogin()">
+          <span fxFlex class="text-center text-danger" style="color: #f44336;" *ngIf="loginError != ''">{{loginError}}</span>
+          <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
+              <div fxFlexFill>
+                  <mat-form-field class="w-100">
+                      <input matInput placeholder="Site Name" formControlName="name">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
+              <div fxFlexFill>
+                  <mat-form-field class="w-100">
+                      <input matInput placeholder="Our Vision" formControlName="our_vision">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div fxFlex  fxlayout="row" fxlayout.lt-md="column">
+              <div fxFlexFill>
+                  <mat-form-field class="w-100">
+                      <input matInput placeholder="Home Message" formControlName="banner_message">
+                  </mat-form-field>
+              </div>
+          </div>
+          <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill>
+              <input type="file" formControlName="file" accept="image/*" multiple (change)="onFileChange($event)"/>
+            </div>
+          </div>
+          <div class="Upcard" *ngFor="let url of images | slice:1">
+            <img [src]="url" height="150" width="200px" style="margin: 3px;"><span class="delete-entry" style="cursor: pointer;" (click)="deleteImage(url)">x</span>
+          </div>
+          <!-- <img *ngFor='let url of images' [src]="url" height="150" width="200px" style="margin: 3px;"> <br/> -->
+          <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+              <div fxFlexFill>
+                  <button type="submit" mat-raised-button color="primary" class="w-100" [disabled]="loginForm.invalid">Save</button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>
