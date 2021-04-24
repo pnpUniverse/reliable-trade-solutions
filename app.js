@@ -31,8 +31,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src/uploads')));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('./admin-panel/dist'));
 app.use(express.static('./front-end/dist'));
+app.use(express.static('./admin-panel/dist'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 /**
@@ -56,7 +56,6 @@ app.use('/api', api);
 /**
  * For deploying front-end
  */
-app.use('/', express.static('./front-end/dist'));
 app.use('/client', express.static('./front-end/dist'));
 app.use('/client/*', express.static('./front-end/dist'));
 app.use('/admin', express.static('./admin-panel/dist'));
