@@ -136,7 +136,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.open(this.mymodal);
+    // this.open(this.mymodal);
   }
 
   changeCurrency(currency){
