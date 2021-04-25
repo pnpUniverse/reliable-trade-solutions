@@ -14,6 +14,9 @@
             <li class="nav-item" *ngFor="let myRoute of myRoutes; let i = index" [class.active]="selectedIndex === i" (click)="setIndex(i)">
               <a class="nav-link display_link" routerLink="{{ myRoute.url }}">{{ myRoute.name }}</a>
             </li>
+            <li class="nav-item">
+              <a class="btn nav-link display_link" href="https://api.whatsapp.com/send?phone=601169607618&text=Hello,%20Kindly%20Start%20My%20Free%20Trial" target="_blank"><img src="../assets/img/whatsapp.png" height="22px"></a>
+            </li>
           </ul>
         </div>
       </nav>
@@ -37,11 +40,11 @@
               <strong>Email:</strong> {{contact_us_content.email}}<br>
             </p>
             <div class="social-links mt-3">
-              <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+              <a href="https://api.whatsapp.com/send?phone=601169607618&text=Hello,%20Kindly%20Start%20My%20Free%20Trial" target="_blank" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+              <a href="https://api.whatsapp.com/send?phone=60182715774&text=Hello,%20Kindly%20Start%20My%20Free%20Trial" target="_blank" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
               <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
               <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
               <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
             </div>
           </div>
         </div>
@@ -85,7 +88,7 @@
               <select class="form-control">
                 <option value="">Select Services</option>
                 <option value="Short Term Trading Tips">KLSE Trading Tips</option>
-                <option value="Mid Term Investing Tips">SGX Trading Tisp</option>
+                <option value="Mid Term Investing Tips">SGX Trading Tisps</option>
                 <option value="Forex Signal Service">Forex Signal Service</option>
                 <option value="Traders Delight Service">Comex Signal Services</option>
               </select>
@@ -130,7 +133,7 @@
         <select class="form-control" formControlName="service">
           <option value="">Select Services</option>
           <option value="Short Term Trading Tips">KLSE Trading Tips</option>
-          <option value="Mid Term Investing Tips">SGX Trading Tisp</option>
+          <option value="Mid Term Investing Tips">SGX Trading Tisps</option>
           <option value="Forex Signal Service">Forex Signal Service</option>
           <option value="Traders Delight Service">Comex Signal Services</option>
         </select>

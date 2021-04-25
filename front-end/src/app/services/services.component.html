@@ -25,11 +25,11 @@
 
         <div class="row">
             <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200" *ngFor="let service of services">
-                <div class="icon-box animated slideInRight" (click)="service.show_hide =! service.show_hide">
+                <div class="icon-box animated slideInRight" (click)="handleShowHide(service._id, service.show_hide =! service.show_hide)">
                     <div class="icon"><i class="bx bx-vector"></i></div>
                     <h4>{{service.serviceName}}</h4>
                     <p>{{service.serviceDesc}}</p>
-                    <span *ngIf="service.show_hide" [innerHTML]="service.serviceServices"></span>
+                    <span *ngIf="service.show_hide" class="service_content" [innerHTML]="service.serviceServices"></span>
                 </div>
             </div>
         </div>

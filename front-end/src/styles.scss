@@ -535,7 +535,7 @@ h6 {
 	}
 }
 section {
-	padding: 60px 0;
+	// padding: 60px 0;
 	overflow: hidden;
 }
 .section-title {
@@ -672,6 +672,7 @@ section {
 		padding: 80px 20px;
 		transition: all ease-in-out 0.3s;
 		background: #fff;
+		margin: 6px;
 		.icon {
 			margin: 0 auto;
 			width: 64px;

@@ -77,7 +77,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       url: '/privacy_policy'
     },
     {
-      name : 'Terms & Codition',
+      name : 'Terms & Condition',
       url: '/terms_and_condition'
     },
     {

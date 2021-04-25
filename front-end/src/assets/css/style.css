@@ -50,6 +50,11 @@ h1, h2, h3, h4, h5, h6 {
   transition: all 0.4s;
 }
 
+.service_content {
+  text-align: initial;
+  font-weight: 600;
+  padding-top: 15px !important;
+}
 .back-to-top i:hover {
   background: #151515;
   color: #ffc451;
@@ -598,7 +603,7 @@ h1, h2, h3, h4, h5, h6 {
 # Sections General
 --------------------------------------------------------------*/
 section {
-  padding: 60px 0;
+  /*padding: 60px 0;*/
   overflow: hidden;
 }
 
@@ -757,6 +762,7 @@ section {
   padding: 80px 20px;
   transition: all ease-in-out 0.3s;
   background: #fff;
+  margin: 6px; 
 }
 
 .services .icon-box .icon {
