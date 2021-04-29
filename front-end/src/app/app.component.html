@@ -2,7 +2,7 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top header_background">
     <div class="container d-flex align-items-center justify-content-between">
-      <h1 class="logo" style="font-size: 26px; white-space: nowrap !important; font-weight: bolder;"><a routerLink="">Reliable Trade Solutions</a></h1>
+      <h1 class="logo" style="font-size: 26px; white-space: nowrap !important; font-weight: bolder;"><a routerLink="">Reliable Trade Solution</a></h1>
       <nav class="navbar navbar-expand-sm navbar-light">
         <!-- <a class="navbar-brand" href="#">Brand/Logo</a> -->
         <button class="navbar-toggler display_hamburger" (click)="collapse=!collapse" type="button" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,7 +86,7 @@
               <div class="validate"></div>
             </div>
             <div class="form-group">
-              <select class="form-control">
+              <select class="form-control" formControlName="service">
                 <option value="">Select Services</option>
                 <option value="Short Term Trading Tips">KLSE Trading Tips</option>
                 <option value="Mid Term Investing Tips">SGX Trading Tisps</option>
@@ -94,11 +94,13 @@
                 <option value="Traders Delight Service">Comex Signal Services</option>
               </select>
             </div>
-            <div class="form-group">
+<!--             <div class="form-group">
               <textarea class="form-control" rows="3" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
               <div class="validate"></div>
+            </div> -->
+            <div class="text-center">
+              <button type="submit" class="btn" style="background: #071527; cursor: pointer; color: #ffffff" [disabled]="loginForm.invalid">Request For Free Trial</button>
             </div>
-            <div class="text-center"><button type="submit" class="btn" style="background: #ffc451; cursor: pointer;" [disabled]="loginForm.invalid">Request For Free Trial</button></div>
           </form>
         </div>
       </div>
@@ -107,7 +109,7 @@
 </footer>
 <!-- End Footer -->
 <div class="image">
-  <a (click)="open(mymodal)"><img id="hello" src="assets/img/signup.png" style="width: 50px;position: fixed;top:400px;left:2px;z-index: 999999;border: 2px solid #fbba42;border-top-right-radius: 15px;border-bottom-right-radius: 15px;cursor: pointer;"></a>
+  <a (click)="open(mymodal)"><img id="hello" src="assets/img/signup.png" class="open_modal_cls"></a>
 </div>
 <ng-template #mymodal let-modal>
   <form [formGroup]="loginForm" (submit)="loginUser()" class="contact">

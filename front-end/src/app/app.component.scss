@@ -17,3 +17,15 @@
 .navbar-nav {
 	white-space: nowrap !important;
 }
+
+.open_modal_cls{
+	width: 50px;
+	position: fixed; 
+	top:400px; 
+	left:2px; 
+	z-index: 999999; 
+	border: 2px solid #fbba42; 
+	border-top-right-radius: 15px; 
+	border-bottom-right-radius: 15px; 
+	cursor: pointer;
+}

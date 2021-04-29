@@ -209,7 +209,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.loginForm = this.fb.group({
       name: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
-      email: this.fb.control(null, [Validators.required]),
+      email: ['', [Validators.required]],
       service: ['', [Validators.required]]
     });
   }
@@ -233,6 +233,9 @@ export class AppComponent implements OnInit, AfterViewInit {
           type: 'success',
         });
         this.loginForm.reset();
+        this.loginForm.patchValue({
+          service: ''
+        })
       }
     });
   }
