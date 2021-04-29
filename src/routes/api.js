@@ -50,7 +50,24 @@ router.post('/landing_page', function(req, res, next) {
                 res.send({status: true, message : err});
             });
         } else {
-            Home.findOneAndUpdate({_id: fields._id}, fields, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
+            JSON.parse(fields.existing_images).forEach(file_name => {
+                fields.banner_image_path.push(file_name.imageName);
+            });
+            const update_obj = {
+                _id: fields._id,
+                name: fields.name,
+                our_vision: fields.our_vision,
+                banner_message: fields.banner_message,
+                banner_image_path: fields.banner_image_path
+            }
+            if(fields.deletable_images){
+                JSON.parse(fields.deletable_images).forEach(file_name => {
+                    fs.exists(`${global.upload_dir_path}/${file_name}`, (exists) => {
+                        fs.unlink(`${global.upload_dir_path}/${file_name}`, ()=>{});
+                    })
+                })
+            }
+            Home.findOneAndUpdate({_id: fields._id}, update_obj, {new: true, upsert: true, setDefaultsOnInsert: true}, function(error, result) {
                 if(error){
                     res.send({status: true, message : error});
                 } else {

@@ -14,6 +14,7 @@ export class LandingPageComponent implements OnInit {
   loginForm: FormGroup;
   images = [];
   _id: any;
+  deletedImages = [];
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -23,26 +24,39 @@ export class LandingPageComponent implements OnInit {
   loginError = '';
   files : any;
   filesrc = [];
+  server_images=[];
 
   ngOnInit() {
     this.buildForm();
     this.authService.retrieveBySlug('home', 'home').subscribe((res) => {
-      if(res && res['data'] && res['data']['_id'] && res['data']['banner_image_path']){
+      if(res && res['data'] && res['data']['_id']){
         this._id = res['data']['_id'];
-        console.log('this._id: ', this._id)
-        for(let srcs of res['data']['banner_image_path']){
-          this.images.push(`${fileLocation}${srcs}`)
+        if(res['data']['banner_image_path'] && res['data']['banner_image_path'].length){
+          for(let srcs of res['data']['banner_image_path']){
+            this.server_images.push({imageName: srcs, serverPath: `${fileLocation}${srcs}`})
+          }
+          this.loginForm.patchValue({
+            name: res['data']['name'],
+            our_vision: res['data']['our_vision'],
+            banner_message: res['data']['banner_message'],
+            fileSource: res['data']['banner_image_path']
+          });
+        } else {
+          this.loginForm.patchValue({
+            name: res['data']['name'],
+            our_vision: res['data']['our_vision'],
+            banner_message: res['data']['banner_message']
+          });
         }
-        this.loginForm.patchValue({
-          name: res['data']['name'],
-          our_vision: res['data']['our_vision'],
-          banner_message: res['data']['banner_message'],
-          fileSource: res['data']['banner_image_path']
-        });
-
-        console.log('form: ', this.loginForm);
       }
     });
+  }
+
+  deleteServerImage(url: any, i): void {
+    if(this.server_images[i]){
+      this.deletedImages.push(url);
+      this.server_images.splice(i, 1);
+    }
   }
 
   deleteImage(url: any, i): void {
@@ -87,7 +101,16 @@ export class LandingPageComponent implements OnInit {
     const formData = new FormData();
     ['name', 'our_vision', 'banner_message'].map(d => formData.append(d, this.loginForm.value[d]));
     if(this.files) this.files.forEach(file => formData.append('file', file))
-    if(this._id) formData.append('_id', this._id);
+    if(this._id) {
+      formData.append('_id', this._id);
+      if(this.deletedImages){
+        formData.append('deletable_images', JSON.stringify(this.deletedImages));
+      }
+
+      if(this.deletedImages){
+        formData.append('existing_images', JSON.stringify(this.server_images));
+      }
+    }
     this.authService.landing_page(formData).subscribe((res) => {
       if (res['status']) {
         this.loginError = '';

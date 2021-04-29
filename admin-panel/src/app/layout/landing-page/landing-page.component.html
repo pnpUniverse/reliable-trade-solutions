@@ -28,7 +28,12 @@
               <input type="file" formControlName="file" accept="image/*" multiple (change)="onFileChange($event)"/>
             </div>
           </div>
-          <div class="row">
+          <div class="row" *ngIf="server_images">
+            <div class="column" *ngFor="let url of server_images; let i = index">
+              <img [src]="url.serverPath" height="150" width="150px"><mat-icon style="cursor: pointer;" (click)="deleteServerImage(url.imageName, i)">delete_forever</mat-icon>
+            </div>
+          </div>
+          <div class="row" *ngIf="images">
             <div class="column" *ngFor="let url of images; let i = index">
               <img [src]="url" height="150" width="150px"><mat-icon style="cursor: pointer;" (click)="deleteImage(url, i)">delete_forever</mat-icon>
             </div>
