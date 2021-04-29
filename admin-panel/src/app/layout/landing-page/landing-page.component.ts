@@ -83,7 +83,7 @@ export class LandingPageComponent implements OnInit {
   onLogin() {
     const formData = new FormData();
     ['name', 'our_vision', 'banner_message'].map(d => formData.append(d, this.loginForm.value[d]));
-    this.files.forEach(file => formData.append('file', file))
+    if(this.files) this.files.forEach(file => formData.append('file', file))
     if(this._id) formData.append('_id', this._id);
     this.authService.landing_page(formData).subscribe((res) => {
       if (res['status']) {
