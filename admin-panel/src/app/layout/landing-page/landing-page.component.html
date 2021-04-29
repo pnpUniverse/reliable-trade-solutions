@@ -28,10 +28,11 @@
               <input type="file" formControlName="file" accept="image/*" multiple (change)="onFileChange($event)"/>
             </div>
           </div>
-          <div class="Upcard" *ngFor="let url of images | slice:1">
-            <img [src]="url" height="150" width="200px" style="margin: 3px;"><span class="delete-entry" style="cursor: pointer;" (click)="deleteImage(url)">x</span>
+          <div class="row">
+            <div class="column" *ngFor="let url of images; let i = index">
+              <img [src]="url" height="150" width="150px"><mat-icon style="cursor: pointer;" (click)="deleteImage(url, i)">delete_forever</mat-icon>
+            </div>
           </div>
-          <!-- <img *ngFor='let url of images' [src]="url" height="150" width="200px" style="margin: 3px;"> <br/> -->
           <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
               <div fxFlexFill>
                   <button type="submit" mat-raised-button color="primary" class="w-100" [disabled]="loginForm.invalid">Save</button>

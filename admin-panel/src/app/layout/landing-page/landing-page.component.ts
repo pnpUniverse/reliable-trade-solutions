@@ -45,8 +45,11 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-  private deleteImage(url: any): void {
-    this.images = this.images.filter((a) => a !== url);
+  deleteImage(url: any, i): void {
+    if(this.images[i]){
+      this.images.splice(i, 1);
+      this.files.splice(i, 1);
+    }
   }
 
   buildForm() {
