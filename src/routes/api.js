@@ -29,14 +29,15 @@ router.post('/landing_page', function(req, res, next) {
     })
     form.on('file', function(field, file) {
         var oldPath = file.path;
-        var newPath = global.upload_dir_path + '/'+file.name;
+        const file_new_name = Date.now()+'_'+ file.name;
+        var newPath = global.upload_dir_path + '/'+ file_new_name;
         var rawData = fs.readFileSync(oldPath)
         fs.writeFile(newPath, rawData, function(err){
             if(err) console.log(err)
         })
         file.path = newPath;
         if(existsAsync(newPath)){
-            files.push(file.name);
+            files.push(file_new_name);
         } 
     })
     form.on('end', function() {
