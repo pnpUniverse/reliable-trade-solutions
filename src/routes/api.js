@@ -4,6 +4,7 @@ const { login, register, change_duration, get_call_duration } = require('../cont
 const { create_call_set, create_sunday_call_set } = require('../controllers/call_set/call_sets');
 const { Node } = require('../models/node/node');
 const { Home } = require('../models/home/home');
+const { Performance } = require('../models/performance/performance');
 const { Call_Set } = require('../models/call_set/call_set');
 const { Sunday_Call_Set } = require('../models/sunday_call_set/sunday_call_set');
 
@@ -76,6 +77,43 @@ router.post('/landing_page', function(req, res, next) {
                 }
             });
         }
+    });
+    form.parse(req);
+});
+
+router.post('/upload_tracksheet', function(req, res, next) {
+    const form = new formidable.IncomingForm();
+    files = [],
+    file_name = '';
+    performance_file_path = '';
+    fields = {};
+    form.on('field', function(field, value) {
+        fields[field] = value;
+    })
+    form.on('file', function(field, file) {
+        var oldPath = file.path;
+        const file_new_name = Date.now()+'_'+ file.name;
+        file_name = file.name;
+        performance_file_path = file_new_name;
+        var newPath = global.performance_files_upload_dir_path + '/'+ file_new_name;
+        var rawData = fs.readFileSync(oldPath)
+        fs.writeFile(newPath, rawData, function(err){
+            if(err) console.log(err)
+        })
+        file.path = newPath;
+        if(existsAsync(newPath)){
+            files.push(file_new_name);
+        } 
+    })
+    form.on('end', function() {
+        fields['file_name'] = file_name;
+        fields['performance_file_path'] = performance_file_path;
+        var myData = new Performance(fields);
+        myData.save().then(item => {
+            res.send({status: true, _id: item._id});
+        }).catch(err => {
+            res.send({status: true, message : err});
+        });
     });
     form.parse(req);
 });

@@ -1,3 +1,17 @@
-<p>
-  track-records works!
-</p>
+<div class="wrapper">
+  <div class="content">
+      <form class="login-form" fxFlex [formGroup]="loginForm" (submit)="onLogin()">
+          <span fxFlex class="text-center text-danger" style="color: #f44336;" *ngIf="loginError != ''">{{loginError}}</span>
+          <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+            <div fxFlexFill>
+              <input type="file" formControlName="file"  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" multiple (change)="onFileChange($event)"/>
+            </div>
+          </div>
+          <div fxFlex  fxLayout="row" fxLayout.lt-md="column">
+              <div fxFlexFill>
+                  <button type="submit" mat-raised-button color="primary" class="w-100">Save</button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>

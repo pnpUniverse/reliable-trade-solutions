@@ -69,6 +69,10 @@ const routes: Routes = [
             {
                 path: 'view_mail/:mail_id',
                 loadChildren: () => import('./view_mail/view_mail.module').then(m => m.ViewMailModule)
+            },
+            {
+                path: 'track_records',
+                loadChildren: () => import('./track-records/track-records.module').then(m => m.TrackRecordsModule)
             }
         ]
     }

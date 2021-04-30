@@ -7,3 +7,16 @@
 	background-repeat: no-repeat !important;
 	background-position: 91% 30% !important;
 }
+
+.card-header {
+  /*padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03) !important;;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);*/
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0,0,0,.125);
+  backdrop-filter: brightness(0.5) !important;
+  color: cornsilk !important;
+  font-weight: bolder !important;
+}

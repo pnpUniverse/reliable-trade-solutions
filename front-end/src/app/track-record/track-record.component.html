@@ -7,3 +7,25 @@
     </div>
   </div>
 </section>
+<section id="services" class="services container" *ngIf="performances">
+    <div class="row">
+        <div class="col-md-6" style="padding-bottom: 1em;">
+            <div class="card">
+                <div class="card-header">
+                    Tracksheet
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr *ngFor="let performance of performances">
+                                <td *ngIf="performance.file_name">
+                                	<a [href]="performance.performance_file_path" style="color: black" [download]="performance.file_name">{{performance.file_name}}</a>
+                            	</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

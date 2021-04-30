@@ -111,7 +111,7 @@ export class LandingPageComponent implements OnInit {
         formData.append('existing_images', JSON.stringify(this.server_images));
       }
     }
-    this.authService.landing_page(formData).subscribe((res) => {
+    this.authService.fileUploadApi('landing_page', formData).subscribe((res) => {
       if (res['status']) {
         this.loginError = '';
         this._id =  res['_id'];

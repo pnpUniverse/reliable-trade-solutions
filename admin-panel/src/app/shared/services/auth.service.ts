@@ -135,8 +135,8 @@ export class AuthService {
     );
   }
 
-  landing_page(loginData) {
-    return this.http.post(`${apiUrl}landing_page`, loginData).pipe(
+  fileUploadApi(action, loginData) {
+    return this.http.post(`${apiUrl}${action}`, loginData).pipe(
       map(res => {
         if (res['token']) {
           localStorage.setItem('token', res['token']);

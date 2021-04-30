@@ -11,6 +11,7 @@ const logger = require('morgan');
 const mongoManager = new MongoManager(config);
 const passport = require('passport');
 global.upload_dir_path = path.join(__dirname, 'src', 'uploads');
+global.performance_files_upload_dir_path = path.join(__dirname, 'src', 'performance_files');
 
 // var cors = require('cors');
 // app.use(cors());
@@ -30,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'src/uploads')));
+app.use(express.static(path.join(__dirname, 'src/performance_files')));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('./front-end/dist'));
 app.use(express.static('./admin-panel/dist'));

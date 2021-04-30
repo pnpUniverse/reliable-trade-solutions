@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
-import { environment } from '../../environments/environment';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { environment } from '../../environments/environment';
 const { image_path } = environment;
 @Component({
   selector: 'app-home',
