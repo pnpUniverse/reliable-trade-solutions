@@ -3,10 +3,11 @@
     <ng-template ngbSlide *ngFor="let img_name of this.homeObj.banner_image_path; let i = index">
       <img [src]="image_path_server+img_name" alt="Random first slide" class="image_customization" width="100%">
       <div class="carousel-caption">
-        <h1 class="animated slideInUp showInLeft">{{homeObj.name}}</h1>
-        <h2 class="animated slideInUp showInLeft bannerh2">{{homeObj.our_vision}}</h2>
-        <h2 class="animated slideInUp showInRight bannerh2">{{homeObj.banner_messages[i]}}</h2>
+        <h1 class="animated bounceInLeft showInLeft">{{homeObj.name}}</h1>
+        <h2 class="animated bounceInRight showInLeft bannerh2">{{homeObj.our_vision}}</h2>
+        <h2 class="animated bounceInDown showInRight bannerh2">{{homeObj.banner_messages[i]}}</h2>
       </div>
+      <!-- lightSpeedIn -->
     </ng-template>
   </ngb-carousel>
 </section>
