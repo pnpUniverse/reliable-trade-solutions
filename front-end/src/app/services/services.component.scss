@@ -26,3 +26,10 @@ ol, ul, dl {
 	font-size: x-large;
 	font-weight: 600;
 }
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  #hero {
+    height: 40vh !important;
+  }
+}

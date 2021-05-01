@@ -4,8 +4,8 @@
       <img [src]="image_path_server+img_name" alt="Random first slide" class="image_customization" width="100%">
       <div class="carousel-caption">
         <h1 class="animated slideInUp showInLeft">{{homeObj.name}}</h1>
-        <h2 class="animated slideInUp showInLeft">{{homeObj.our_vision}}</h2>
-        <h2 class="animated slideInUp showInRight">{{homeObj.banner_messages[i]}}</h2>
+        <h2 class="animated slideInUp showInLeft bannerh2">{{homeObj.our_vision}}</h2>
+        <h2 class="animated slideInUp showInRight bannerh2">{{homeObj.banner_messages[i]}}</h2>
       </div>
     </ng-template>
   </ngb-carousel>
@@ -15,11 +15,12 @@
     <div class="row">
       <div class="col-xl-8 col-lg-9 col-md-8">
         <div class="experience-text mb-20">
-          <h2 style="white-space: nowrap;">You Need Professional Trading Consultant?</h2>
+          <h2 class="consultanth2" style="white-space: nowrap;">You Need Professional Trading Consultant?</h2>
         </div>
       </div>
       <div class="col-xl-4 col-lg-3 col-md-4">
-        <div class="experience-button text-md-right mb-20"> <a class="btn" href="https://api.whatsapp.com/send?phone=60182715774&text=Hello,%20Kindly%20Start%20My%20Free%20Trial" target="_blank">Contact US <i class="fas fa-long-arrow-alt-right"></i></a> </div>
+        <div class="experience-button text-md-right mb-20">
+         <a class="btn contact_btn" href="https://api.whatsapp.com/send?phone=60182715774&text=Hello,%20Kindly%20Start%20My%20Free%20Trial" target="_blank">Contact US <i class="fas fa-long-arrow-alt-right"></i></a> </div>
       </div>
     </div>
   </div>

@@ -20,3 +20,10 @@
   color: cornsilk !important;
   font-weight: bolder !important;
 }
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  #hero {
+    height: 40vh !important;
+  }
+}

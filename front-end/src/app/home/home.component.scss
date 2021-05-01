@@ -120,7 +120,11 @@ ngb-carousel {
     font-size: 30px !important;
   }
 
-  h2 {
+  .bannerh2 {
+    font-size: 30px !important;
+  }
+
+  .consultanth2 {
     font-size: 30px !important;
   }
 
@@ -132,12 +136,21 @@ ngb-carousel {
 /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
 @media screen and (max-width: 600px) {
   h1 {
-    font-size: 15px !important;
+    font-size: 20px !important;
   }
 
-  h2 {
-    font-size: 15px !important;
+  .bannerh2 {
+    font-size: 13px !important;
   }
+
+  .consultanth2{
+    font-size: 18px !important;
+  }
+
+  .contact_btn {
+    font-size: 10px !important;
+  }
+
   .business-text p {
     font-size: 20px !important;
   }

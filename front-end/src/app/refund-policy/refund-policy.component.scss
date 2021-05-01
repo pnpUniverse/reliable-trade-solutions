@@ -1,7 +1,19 @@
 #hero {
-  width: 100%;
-  height: 75vh;
-  background: url("../../assets/img/privacy-policy-banner.jpg") top center !important;
-  background-size: cover;
-  position: relative;
+	width: 100%;
+	height: 75vh;
+	background: url("../../assets/img/privacy-policy-banner.jpg") top center !important;
+	background-size: cover !important;
+	position: relative;
+	background-repeat: no-repeat !important;
+	background-position: 91% 77% !important;
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  	#hero {
+    	height: 40vh !important;
+  	}
+  	.lowerText {
+		padding: 20px !important;
+	}
 }
