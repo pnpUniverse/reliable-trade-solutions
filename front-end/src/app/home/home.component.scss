@@ -132,6 +132,10 @@ ngb-carousel {
   h3 {
     font-size: 30px !important;
   }
+
+  .provide_space {
+    margin-left: 3em !important;
+  }
 }
 
 /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
@@ -158,5 +162,8 @@ ngb-carousel {
   }
   h3 {
     font-size: 10px !important;
+  }
+  .provide_space {
+    margin-left: 5em !important;
   }
 }
