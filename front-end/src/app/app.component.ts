@@ -4,7 +4,7 @@ import { AuthService } from './shared/services/auth.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastConfig, Toaster, ToastType } from "ngx-toast-notifications";
-import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+// import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,7 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('mymodal') mymodal : TemplateRef<any>;
-  payPalConfig?: IPayPalConfig;
+  // payPalConfig?: IPayPalConfig;
   title = 'reliable-trade-solutions';
   collapse: boolean = true;
   selectedIndex: any = null;
@@ -132,78 +132,78 @@ export class AppComponent implements OnInit, AfterViewInit {
       }
     });
     this.buildForm();
-    this.initConfig('USD');
+    // this.initConfig('USD');
   }
 
   ngAfterViewInit() {
-    // this.open(this.mymodal);
+    this.open(this.mymodal);
   }
 
   changeCurrency(currency){
     this.currency = currency;
-    this.initConfig(currency);
+    // this.initConfig(currency);
   }
 
-  initConfig(currency): void {
-    this.payPalConfig = {
-      currency: this.currency,
-      clientId: 'sb',
-      createOrderOnClient: (data) => <ICreateOrderRequest>{
-        intent: 'CAPTURE',
-        purchase_units: [
-          {
-            amount: {
-              currency_code: this.currency,
-              value: '9.99',
-              breakdown: {
-                item_total: {
-                  currency_code: this.currency,
-                  value: '9.99'
-                }
-              }
-            },
-            items: [
-              {
-                name: 'Enterprise Subscription',
-                quantity: '1',
-                category: 'DIGITAL_GOODS',
-                unit_amount: {
-                  currency_code: this.currency,
-                  value: '9.99',
-                },
-              }
-            ]
-          }
-        ]
-      },
-      advanced: {
-        commit: 'true'
-      },
-      style: {
-        label: 'paypal',
-        layout: 'vertical'
-      },
-      onApprove: (data, actions) => {
-        console.log('onApprove - transaction was approved, but not authorized', data, actions);
-        actions.order.get().then(details => {
-          console.log('onApprove - you can get full order details inside onApprove: ', details);
-        });
-      },
-      onClientAuthorization: (data) => {
-        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-        this.showSuccess = true;
-      },
-      onCancel: (data, actions) => {
-        console.log('OnCancel', data, actions);
-      },
-      onError: err => {
-        console.log('OnError', err);
-      },
-      onClick: (data, actions) => {
-        console.log('onClick', data, actions);
-      },
-    };
-  }
+  // initConfig(currency): void {
+  //   this.payPalConfig = {
+  //     currency: this.currency,
+  //     clientId: 'sb',
+  //     createOrderOnClient: (data) => <ICreateOrderRequest>{
+  //       intent: 'CAPTURE',
+  //       purchase_units: [
+  //         {
+  //           amount: {
+  //             currency_code: this.currency,
+  //             value: '9.99',
+  //             breakdown: {
+  //               item_total: {
+  //                 currency_code: this.currency,
+  //                 value: '9.99'
+  //               }
+  //             }
+  //           },
+  //           items: [
+  //             {
+  //               name: 'Enterprise Subscription',
+  //               quantity: '1',
+  //               category: 'DIGITAL_GOODS',
+  //               unit_amount: {
+  //                 currency_code: this.currency,
+  //                 value: '9.99',
+  //               },
+  //             }
+  //           ]
+  //         }
+  //       ]
+  //     },
+  //     advanced: {
+  //       commit: 'true'
+  //     },
+  //     style: {
+  //       label: 'paypal',
+  //       layout: 'vertical'
+  //     },
+  //     onApprove: (data, actions) => {
+  //       console.log('onApprove - transaction was approved, but not authorized', data, actions);
+  //       actions.order.get().then(details => {
+  //         console.log('onApprove - you can get full order details inside onApprove: ', details);
+  //       });
+  //     },
+  //     onClientAuthorization: (data) => {
+  //       console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+  //       this.showSuccess = true;
+  //     },
+  //     onCancel: (data, actions) => {
+  //       console.log('OnCancel', data, actions);
+  //     },
+  //     onError: err => {
+  //       console.log('OnError', err);
+  //     },
+  //     onClick: (data, actions) => {
+  //       console.log('onClick', data, actions);
+  //     },
+  //   };
+  // }
 
   buildForm() {
     this.loginForm = this.fb.group({

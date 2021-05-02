@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastNotificationsModule } from "ngx-toast-notifications";
-import { NgxPayPalModule } from 'ngx-paypal';
+// import { NgxPayPalModule } from 'ngx-paypal';
 import { RefundPolicyComponent } from './refund-policy/refund-policy.component';
 import { TermsAndConditionComponent } from './terms-and-condition/terms-and-condition.component';
 
@@ -23,10 +23,11 @@ import { TermsAndConditionComponent } from './terms-and-condition/terms-and-cond
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ToastNotificationsModule,
-    NgxPayPalModule
+    ToastNotificationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+    // NgxPayPalModule

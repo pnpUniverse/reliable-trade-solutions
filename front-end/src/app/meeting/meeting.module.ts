@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MeetingRoutingModule } from './meeting-routing.module';
 
 
@@ -8,6 +8,8 @@ import { MeetingRoutingModule } from './meeting-routing.module';
   declarations: [],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MeetingRoutingModule
   ]
 })
