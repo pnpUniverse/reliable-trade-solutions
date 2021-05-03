@@ -100,7 +100,7 @@ export class MembershipComponent implements OnInit, AfterViewInit {
     	if(this.service_obj.currency_used == 'USD' ){
 	  		this.usdPayPalConfig = {
 		      	currency: this.service_obj.currency_used,
-		      	clientId: 'sb',
+		      	clientId: 'AcgDMCAxYPlMVrqv4gbUt6cQMttDges-zEvKEkrFNKNs0YxotG2kkMSaozBaN0C4H0QQKtHrmO3pG3Ww',
 		      	createOrderOnClient: (data) => <ICreateOrderRequest>{
 			        intent: 'CAPTURE',
 			        purchase_units: [
@@ -159,7 +159,7 @@ export class MembershipComponent implements OnInit, AfterViewInit {
     	} else {
     		this.sgdPayPalConfig = {
 		      	currency: 'SGD',
-		      	clientId: 'sb',
+		      	clientId: 'AcgDMCAxYPlMVrqv4gbUt6cQMttDges-zEvKEkrFNKNs0YxotG2kkMSaozBaN0C4H0QQKtHrmO3pG3Ww',
 		      	createOrderOnClient: (data) => <ICreateOrderRequest>{
 			        intent: 'CAPTURE',
 			        purchase_units: [
