@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { AuthService } from '../shared/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
@@ -10,32 +10,23 @@ declare let paypal: any;
   templateUrl: './membership.component.html',
   styleUrls: ['./membership.component.scss']
 })
-export class MembershipComponent implements OnInit, AfterViewInit {
+export class MembershipComponent implements OnInit {
+	constructor(
+		private authService: AuthService,
+		private router: Router
+	) { }
 	memberships:any;
-	usdPayPalConfig?: IPayPalConfig;
-	sgdPayPalConfig?: IPayPalConfig;
-	config?: IPayPalConfig;
+	payPalConfig?: IPayPalConfig;
 	showSuccess:any;
-	
-	description: string = '';
-	amount: string = '';
-	descriptionError: any;
-	priceError: any;
-	invoiceid: any;
-	invoiceidError: any;
-	invoiceidDiv: any;
-
 	showModal : boolean;
 	UserId    : string;
 	Firstname : string;
 	Lastname  : string;
 	Email     : string;
 	service_obj: any;
-  	constructor(
-		private authService: AuthService,
-		private router: Router
-	) { }
-  	ngOnInit(): void {
+	paypal_secret_key = "EPsOdG40IvPEm7PA0x4kYVtwce5srL8xdC-2g3NiWl1nE2F-vqaWJMWO_q4BJTLG0Gnyn_yLCm6HITSU";
+	paypal_client_id = "AcgDMCAxYPlMVrqv4gbUt6cQMttDges-zEvKEkrFNKNs0YxotG2kkMSaozBaN0C4H0QQKtHrmO3pG3Ww";
+  	ngOnInit() {
   		this.authService.retrieve('memberships').subscribe((res) => {
 	      	if(res && res['data'] && res['data']){
 	      		this.memberships = res['data'];
@@ -79,161 +70,301 @@ export class MembershipComponent implements OnInit, AfterViewInit {
 	  	});
 	  	// this.initConfig();
   	}
-
-  	private loadExternalScript(scriptUrl: string) {
-	    return new Promise((resolve, reject) => {
-	    	console.log('url: ', scriptUrl);
-	      	const scriptElement = document.createElement('script')
-	      	scriptElement.src = scriptUrl
-	      	scriptElement.onload = resolve
-      		document.body.appendChild(scriptElement)
-  		})
-  	}
-
-  	validate(event) {
-      return event.value.length > 0;
-    }
-
-    handleModel(service_name, detail) {
+  	  handleModel(service_name, detail) {
     	this.service_obj = detail;
     	this.service_obj['service_name'] = service_name;
-    	if(this.service_obj.currency_used == 'USD' ){
-	  		this.usdPayPalConfig = {
-		      	currency: this.service_obj.currency_used,
-		      	clientId: 'AcgDMCAxYPlMVrqv4gbUt6cQMttDges-zEvKEkrFNKNs0YxotG2kkMSaozBaN0C4H0QQKtHrmO3pG3Ww',
-		      	createOrderOnClient: (data) => <ICreateOrderRequest>{
-			        intent: 'CAPTURE',
-			        purchase_units: [
-			          	{
-			            	amount: {
-			              		currency_code: this.service_obj.currency_used,
-			              		value: this.service_obj.service_price,
-			              		breakdown: {
-			                		item_total: {
-			                  			currency_code: this.service_obj.currency_used,
-			                  			value: this.service_obj.service_price
-			                		}
-			              		}
-			            	},
-			            	items: [
-			              		{
-			                		name: 'Enterprise Subscription',
-			                		quantity: '1',
-			                		category: 'DIGITAL_GOODS',
-			                		unit_amount: {
-				                  		currency_code: this.service_obj.currency_used,
-				                  		value: this.service_obj.service_price,
-				                	},
-				              	}
-				            ]
-			          	}
-			        ]
-			    },
-			    advanced: {
-			        commit: 'true'
-		      	},
-		      	style: {
-		        	label: 'paypal',
-		        	layout: 'vertical'
-				},
-				onApprove: (data, actions) => {
-		        	console.log('onApprove - transaction was approved, but not authorized', data, actions);
-		        	actions.order.get().then(details => {
-		          		console.log('onApprove - you can get full order details inside onApprove: ', details);
-		        	});
-				},
-				onClientAuthorization: (data) => {
-		        	console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-		        	this.showSuccess = true;
-				},
-				onCancel: (data, actions) => {
-		        	console.log('OnCancel', data, actions);
-				},
-				onError: err => {
-			        console.log('OnError', err);
-				},
-				onClick: (data, actions) => {
-			        console.log('onClick', data, actions);
-		      	},
-		    };
-    	} else {
-    		this.sgdPayPalConfig = {
-		      	currency: 'SGD',
-		      	clientId: 'AcgDMCAxYPlMVrqv4gbUt6cQMttDges-zEvKEkrFNKNs0YxotG2kkMSaozBaN0C4H0QQKtHrmO3pG3Ww',
-		      	createOrderOnClient: (data) => <ICreateOrderRequest>{
-			        intent: 'CAPTURE',
-			        purchase_units: [
-			          	{
-			            	amount: {
-			              		currency_code: 'SGD',
-			              		value: this.service_obj.service_price,
-			              		breakdown: {
-			                		item_total: {
-			                  			currency_code: 'SGD',
-			                  			value: this.service_obj.service_price
-			                		}
-			              		}
-			            	},
-			            	items: [
-			              		{
-			                		name: 'Enterprise Subscription',
-			                		quantity: '1',
-			                		category: 'DIGITAL_GOODS',
-			                		unit_amount: {
-				                  		currency_code: 'SGD',
-				                  		value: this.service_obj.service_price,
-				                	},
-				              	}
-				            ]
-			          	}
-			        ]
-			    },
-			    advanced: {
-			        commit: 'true'
-		      	},
-		      	style: {
-		        	label: 'paypal',
-		        	layout: 'vertical'
-				},
-				onApprove: (data, actions) => {
-		        	console.log('onApprove - transaction was approved, but not authorized', data, actions);
-		        	actions.order.get().then(details => {
-		          		console.log('onApprove - you can get full order details inside onApprove: ', details);
-		        	});
-				},
-				onClientAuthorization: (data) => {
-		        	console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-		        	this.showSuccess = true;
-				},
-				onCancel: (data, actions) => {
-		        	console.log('OnCancel', data, actions);
-				},
-				onError: err => {
-			        console.log('OnError', err);
-				},
-				onClick: (data, actions) => {
-			        console.log('onClick', data, actions);
-		      	},
-		    };
-    	}
+    	this.payPalConfig = {
+	      	currency: 'SGD',
+	      	clientId: this.paypal_client_id,
+	      	createOrderOnClient: (data) => <ICreateOrderRequest>{
+		        intent: 'CAPTURE',
+		        purchase_units: [
+		          	{
+		            	amount: {
+		              		currency_code: 'SGD',
+		              		value: this.service_obj.service_price,
+		              		breakdown: {
+		                		item_total: {
+		                  			currency_code: 'SGD',
+		                  			value: this.service_obj.service_price
+		                		}
+		              		}
+		            	},
+		            	items: [
+		              		{
+		                		name: 'Enterprise Subscription',
+		                		quantity: '1',
+		                		category: 'DIGITAL_GOODS',
+		                		unit_amount: {
+			                  		currency_code: 'SGD',
+			                  		value: this.service_obj.service_price,
+			                	},
+			              	}
+			            ]
+		          	}
+		        ]
+		    },
+		    advanced: {
+		        commit: 'true'
+	      	},
+	      	style: {
+	        	label: 'paypal',
+	        	layout: 'vertical'
+			},
+			onApprove: (data, actions) => {
+	        	console.log('onApprove - transaction was approved, but not authorized', data, actions);
+	        	actions.order.get().then(details => {
+	          		console.log('onApprove - you can get full order details inside onApprove: ', details);
+	        	});
+			},
+			onClientAuthorization: (data) => {
+	        	console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+	        	this.showSuccess = true;
+			},
+			onCancel: (data, actions) => {
+	        	console.log('OnCancel', data, actions);
+			},
+			onError: err => {
+		        console.log('OnError', err);
+			},
+			onClick: (data, actions) => {
+		        console.log('onClick', data, actions);
+	      	}
+	    };
 	    setTimeout(x => {
 	    	this.showModal = true;
 	    },200)
-  	}
-  	hide() {
-    	this.showModal = false;
-    	this.usdPayPalConfig = undefined;
-    	this.sgdPayPalConfig =  undefined;
-    	this.reloadComponent();
-  	}
-
-  	reloadComponent() {
-  		let currentUrl = this.router.url;
-      	this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-      	this.router.onSameUrlNavigation = 'reload';
-      	this.router.navigate([currentUrl]);
-  	}
-
-  	ngAfterViewInit(): void {
 	}
+	hide() {
+    	this.showModal = false;
+    	// this.usdPayPalConfig = undefined;
+    	// this.sgdPayPalConfig =  undefined;
+    	this.payPalConfig = undefined;
+    	// this.reloadComponent();
+  	}
 }
+// 	// usdPayPalConfig?: IPayPalConfig;
+// 	// sgdPayPalConfig?: IPayPalConfig;
+// 	// config?: IPayPalConfig;
+// 	memberships:any;
+// 	payPalConfig?: IPayPalConfig;
+// 	showSuccess:any;
+// 	@ViewChild('paypal') paypalElement: ElementRef;	
+
+//   	private loadExternalScript(scriptUrl: string) {
+// 	    return new Promise((resolve, reject) => {
+// 	    	console.log('url: ', scriptUrl);
+// 	      	const scriptElement = document.createElement('script')
+// 	      	scriptElement.src = scriptUrl
+// 	      	scriptElement.onload = resolve
+//       		document.body.appendChild(scriptElement)
+//   		})
+//   	}
+
+//   	validate(event) {
+//       return event.value.length > 0;
+//     }
+
+//     // https://www.paypal.com/sdk/js?client-id=AcgDMCAxYPlMVrqv4gbUt6cQMttDges-zEvKEkrFNKNs0YxotG2kkMSaozBaN0C4H0QQKtHrmO3pG3Ww&currency=SGD
+
+//     handleModel(service_name, detail) {
+//     	this.service_obj = detail;
+//     	this.service_obj['service_name'] = service_name;
+//     	this.payPalConfig = {
+// 	      	currency: 'SGD',
+// 	      	clientId: this.paypal_client_id,
+// 	      	createOrderOnClient: (data) => <ICreateOrderRequest>{
+// 		        intent: 'CAPTURE',
+// 		        purchase_units: [
+// 		          	{
+// 		            	amount: {
+// 		              		currency_code: 'SGD',
+// 		              		value: this.service_obj.service_price,
+// 		              		breakdown: {
+// 		                		item_total: {
+// 		                  			currency_code: 'SGD',
+// 		                  			value: this.service_obj.service_price
+// 		                		}
+// 		              		}
+// 		            	},
+// 		            	items: [
+// 		              		{
+// 		                		name: 'Enterprise Subscription',
+// 		                		quantity: '1',
+// 		                		category: 'DIGITAL_GOODS',
+// 		                		unit_amount: {
+// 			                  		currency_code: 'SGD',
+// 			                  		value: this.service_obj.service_price,
+// 			                	},
+// 			              	}
+// 			            ]
+// 		          	}
+// 		        ]
+// 		    },
+// 		    advanced: {
+// 		        commit: 'true'
+// 	      	},56
+// 	      	style: {
+// 	        	label: 'paypal',
+// 	        	layout: 'vertical'
+// 			},
+// 			onApprove: (data, actions) => {
+// 	        	console.log('onApprove - transaction was approved, but not authorized', data, actions);
+// 	        	actions.order.get().then(details => {
+// 	          		console.log('onApprove - you can get full order details inside onApprove: ', details);
+// 	        	});
+// 			},
+// 			onClientAuthorization: (data) => {
+// 	        	console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+// 	        	this.showSuccess = true;
+// 			},
+// 			onCancel: (data, actions) => {
+// 	        	console.log('OnCancel', data, actions);
+// 			},
+// 			onError: err => {
+// 		        console.log('OnError', err);
+// 			},
+// 			onClick: (data, actions) => {
+// 		        console.log('onClick', data, actions);
+// 	      	}
+// 	    };
+// 	    setTimeout(x => {
+// 	    	this.showModal = true;
+// 	    },200)
+// 	}
+//     // 	if(this.service_obj.currency_used == 'USD' ){
+// 	  	// 	this.usdPayPalConfig = {
+// 		  //     	currency: this.service_obj.currency_used,
+// 		  //     	clientId: 'AcgDMCAxYPlMVrqv4gbUt6cQMttDges-zEvKEkrFNKNs0YxotG2kkMSaozBaN0C4H0QQKtHrmO3pG3Ww',
+// 		  //     	createOrderOnClient: (data) => <ICreateOrderRequest>{
+// 			 //        intent: 'CAPTURE',
+// 			 //        purchase_units: [
+// 			 //          	{
+// 			 //            	amount: {
+// 			 //              		currency_code: this.service_obj.currency_used,
+// 			 //              		value: this.service_obj.service_price,
+// 			 //              		breakdown: {
+// 			 //                		item_total: {
+// 			 //                  			currency_code: this.service_obj.currency_used,
+// 			 //                  			value: this.service_obj.service_price
+// 			 //                		}
+// 			 //              		}
+// 			 //            	},
+// 			 //            	items: [
+// 			 //              		{
+// 			 //                		name: 'Enterprise Subscription',
+// 			 //                		quantity: '1',
+// 			 //                		category: 'DIGITAL_GOODS',
+// 			 //                		unit_amount: {
+// 				//                   		currency_code: this.service_obj.currency_used,
+// 				//                   		value: this.service_obj.service_price,
+// 				//                 	},
+// 				//               	}
+// 				//             ]
+// 			 //          	}
+// 			 //        ]
+// 			 //    },
+// 			 //    advanced: {
+// 			 //        commit: 'true'
+// 		  //     	},
+// 		  //     	style: {
+// 		  //       	label: 'paypal',
+// 		  //       	layout: 'vertical'
+// 				// },
+// 				// onApprove: (data, actions) => {
+// 		  //       	console.log('onApprove - transaction was approved, but not authorized', data, actions);
+// 		  //       	actions.order.get().then(details => {
+// 		  //         		console.log('onApprove - you can get full order details inside onApprove: ', details);
+// 		  //       	});
+// 				// },
+// 				// onClientAuthorization: (data) => {
+// 		  //       	console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+// 		  //       	this.showSuccess = true;
+// 				// },
+// 				// onCancel: (data, actions) => {
+// 		  //       	console.log('OnCancel', data, actions);
+// 				// },
+// 				// onError: err => {
+// 			 //        console.log('OnError', err);
+// 				// },
+// 				// onClick: (data, actions) => {
+// 			 //        console.log('onClick', data, actions);
+// 		  //     	},
+// 		  //   };
+//     // 	} else {
+//     // 		this.sgdPayPalConfig = {
+// 		  //     	currency: 'SGD',
+// 		  //     	clientId: 'AcgDMCAxYPlMVrqv4gbUt6cQMttDges-zEvKEkrFNKNs0YxotG2kkMSaozBaN0C4H0QQKtHrmO3pG3Ww',
+// 		  //     	createOrderOnClient: (data) => <ICreateOrderRequest>{
+// 			 //        intent: 'CAPTURE',
+// 			 //        purchase_units: [
+// 			 //          	{
+// 			 //            	amount: {
+// 			 //              		currency_code: 'SGD',
+//   	}
+// 			 //              		value: this.service_obj.service_price,
+// 			 //              		breakdown: {
+// 			 //                		item_total: {
+// 			 //                  			currency_code: 'SGD',
+// 			 //                  			value: this.service_obj.service_price
+// 			 //                		}
+// 			 //              		}
+// 			 //            	},
+// 			 //            	items: [
+// 			 //              		{
+// 			 //                		name: 'Enterprise Subscription',
+// 			 //                		quantity: '1',
+// 			 //                		category: 'DIGITAL_GOODS',
+// 			 //                		unit_amount: {
+// 				//                   		currency_code: 'SGD',
+// 				//                   		value: this.service_obj.service_price,
+// 				//                 	},
+// 				//               	}
+// 				//             ]
+// 			 //          	}
+// 			 //        ]
+// 			 //    },
+// 			 //    advanced: {
+// 			 //        commit: 'true'
+// 		  //     	},
+// 		  //     	style: {
+// 		  //       	label: 'paypal',
+// 		  //       	layout: 'vertical'
+// 				// },
+// 				// onApprove: (data, actions) => {
+// 		  //       	console.log('onApprove - transaction was approved, but not authorized', data, actions);
+// 		  //       	actions.order.get().then(details => {
+// 		  //         		console.log('onApprove - you can get full order details inside onApprove: ', details);
+// 		  //       	});
+// 				// },
+// 				// onClientAuthorization: (data) => {
+// 		  //       	console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+// 		  //       	this.showSuccess = true;
+// 				// },
+// 				// onCancel: (data, actions) => {
+// 		  //       	console.log('OnCancel', data, actions);
+// 				// },
+// 				// onError: err => {
+// 			 //        console.log('OnError', err);
+// 				// },
+// 				// onClick: (data, actions) => {
+// 			 //        console.log('onClick', data, actions);
+// 		  //     	},
+// 		  //   };
+//     // 	}
+
+//   	hide() {
+//     	this.showModal = false;
+//     	// this.usdPayPalConfig = undefined;
+//     	// this.sgdPayPalConfig =  undefined;
+//     	this.payPalConfig = undefined;
+//     	// this.reloadComponent();
+//   	}
+
+//   	// reloadComponent() {
+//   	// 	let currentUrl = this.router.url;
+//    //    	this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+//    //    	this.router.onSameUrlNavigation = 'reload';
+//    //    	this.router.navigate([currentUrl]);
+//   	// }
+// }

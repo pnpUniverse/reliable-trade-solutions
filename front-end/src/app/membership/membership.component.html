@@ -66,8 +66,27 @@
                 <!-- Modal footer -->
                 <div class="modal-footer">
                     <div class="text-center">
-                        <ngx-paypal *ngIf="usdPayPalConfig" #payPalElem1 [config]="usdPayPalConfig"></ngx-paypal>
-                        <ngx-paypal *ngIf="sgdPayPalConfig" #payPalElem2 [config]="sgdPayPalConfig"></ngx-paypal>
+                        <!-- <ngx-paypal *ngIf="usdPayPalConfig" #payPalElem1 [config]="usdPayPalConfig"></ngx-paypal> -->
+                        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                        <!-- <div class="row col-md-12 align-items-center justify-content-center">  
+                            <div class="col">
+                                <select id="ddlplan" [(ngModel)]="planId">  
+                                    <option value="">Select Plan </option>  
+                                    <option value="P-20D52460DL479523BLV56M5Y">SINGLE DEVICE MONTHLY </option>  
+                                    <option value="P-69V0714408520914GLVT2OWY">SINGLE DEVICE QUARTERLY</option>  
+                                    <option value="P-05879618SP259004GLVT2RQY">SINGLE DEVICE HALFYEARLY</option>  
+                                    <option value="P-4GG19360L3165531MLVT2T3Q">SINGLE DEVICE YEARLY</option>  
+                                    <option value="P-7EY82590S1568242RLVT2WCI">MULTIPLE DEVICE MONTHLY</option>  
+                                    <option value="P-41W43904VD877272YLVT2X4I">MULTIPLE DEVICE QUARTERLY</option>  
+                                    <option value="P-56995822K5295852ELVT2ZMA">MULTIPLE DEVICE HALFYEARLY</option>  
+                                    <option value="P-6LF21374AM914681BLVT22OY">MULTIPLE DEVICE YEARLY</option>  
+                                    <option value="P-3NS34795KB814132ALVTDMKI">Test Daily Plan</option>  
+                                </select>
+                            </div>  
+                            <div class="col">  
+                                <div #paypal></div>  
+                            </div>
+                        </div> -->
                       <!-- <button type="submit" class="btn" style="background: #071527; cursor: pointer; color: #ffffff">Request For Free Trial</button> -->
                     </div>
                     <!-- <button type="button" class="btn btn-danger" data-dismiss="modal" (click) = "hide()">Close</button> -->
