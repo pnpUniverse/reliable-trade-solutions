@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api/',
-  image_path: 'http://localhost:3000/'
+  apiUrl: 'http://reliable-trade-solutions.herokuapp.com/api/',
+  image_path: 'http://reliable-trade-solutions.herokuapp.com/'
 };
   // apiUrl: 'http://147.139.39.19:3000/api/',
   // image_path: 'http://147.139.39.19:3000/'
